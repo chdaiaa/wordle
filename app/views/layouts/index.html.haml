@@ -1,0 +1,12 @@
+!!! 5
+%html
+  = render "layouts/shared/header"
+
+  %body
+    .wordle-index-page-content
+      %h1.wordle-index-page-header
+        = "Wordle Game"
+
+      .wordle-game-input-fields-row
+        - (0..4).each do |index|
+          .wordle-game-input-field{data: {index: index}}
