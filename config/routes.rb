@@ -13,4 +13,15 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   get "index" => "index#show"
+
+  namespace(
+    :api,
+  ) do
+    post(
+      :wordle_result_submit,
+      to: "wordle_result_submit/action#call",
+      as: "wordle_result_submit",
+    )
+  end
+
 end

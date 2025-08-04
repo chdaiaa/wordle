@@ -13,17 +13,9 @@ class IndexController < ApplicationController
 
   def locals
     {
-      valid_string:     Wordle::ValidText::Enum.all,
-      remaining_trial:  remaining_trial,
+      valid_string: Wordle::ValidText::Enum.all.shuffle.first,
     }
   end
-
-  def remaining_trial
-    params[:remaining_trial] || DEFAULT_REMAINING_TRIAL
-  end
-
-  DEFAULT_REMAINING_TRIAL = 6
-  private_constant :DEFAULT_REMAINING_TRIAL
 
 end
 
