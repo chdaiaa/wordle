@@ -12,7 +12,16 @@
     margin-right: auto;
   }
 
-  .wordle-game-input-fields-row {
+  .wordle-game-input-pad {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+  }
+
+  .wordle-game-input-pad-row {
     margin-left: auto;
     margin-right: auto;
     display: flex;
@@ -30,18 +39,143 @@
     justify-content: center;
     align-items: center;
     font-size: 2rem;
-    line-height: 1;
+    line-height: 62px;
     font-weight: bold;
     vertical-align: middle;
     box-sizing: border-box;
     color: #000000;
     text-transform: uppercase;
     -webkit-user-select: none;
+    text-align: center;
     -moz-user-select: none;
     user-select: none;
 
+    &:disabled {
+      background: transparent;
+    }
+
     &.filled {
       border: 2px solid #878a8c;
+    }
+
+    &.absent {
+      animation: absent_flip 0.5s ease forwards;
+    }
+
+    &.present {
+      animation: present_flip 0.5s ease forwards;
+    }
+
+    &.correct {
+      animation: correct_flip 0.5s ease forwards;
+    }
+
+    &:nth-child(1) {
+      animation-delay: 0s;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+    &:nth-child(4) {
+      animation-delay: 0.3s;
+    }
+    &:nth-child(5) {
+      animation-delay: 0.4s;
+    }
+  }
+
+  @keyframes absent_flip {
+    0% {
+      transform: rotateX(0);
+      background: #fff;
+      border-color: #333;
+    }
+    45% {
+      transform: rotateX(90deg);
+      background: #fff;
+      border-color: #333;
+    }
+    55% {
+      transform: rotateX(90deg);
+      background: #787c7e;   
+      border-color: #787c7e;
+    }
+    100% {
+      background: #787c7e;   
+      border-color: #787c7e;
+      color: #eee;
+    }
+  }
+
+  @keyframes present_flip {
+    0% {
+      transform: rotateX(0);
+      background: #fff;
+      border-color: #333;
+    }
+    45% {
+      transform: rotateX(90deg);
+      background: #fff;
+      border-color: #333;
+    }
+    55% {
+      transform: rotateX(90deg);
+      background: #c9b458;   
+      border-color: #c9b458;
+    }
+    100% {
+      background: #c9b458;   
+      border-color: #c9b458;
+      color: #eee;
+    }
+  }
+
+  @keyframes present_flip {
+    0% {
+      transform: rotateX(0);
+      background: #fff;
+      border-color: #333;
+    }
+    45% {
+      transform: rotateX(90deg);
+      background: #fff;
+      border-color: #333;
+    }
+    55% {
+      transform: rotateX(90deg);
+      background: #c9b458;   
+      border-color: #c9b458;
+    }
+    100% {
+      background: #c9b458;   
+      border-color: #c9b458;
+      color: #eee;
+    }
+  }
+
+  @keyframes correct_flip {
+    0% {
+      transform: rotateX(0);
+      background: #fff;
+      border-color: #333;
+    }
+    45% {
+      transform: rotateX(90deg);
+      background: #fff;
+      border-color: #333;
+    }
+    55% {
+      transform: rotateX(90deg);
+      background: #198038;   
+      border-color: #198038;
+    }
+    100% {
+      background: #198038;   
+      border-color: #198038;
+      color: #eee;
     }
   }
 
@@ -104,6 +238,21 @@
     align-items: center;
     text-transform: uppercase;
     -webkit-tap-highlight-color: rgba(0, 0, 0, .3);
+
+    &.absent {
+      background: #787c7e;
+      color: #eeeeee;
+    }
+
+    &.present {
+      background: #c9b458;
+      color: #eeeeee;
+    }
+
+    &.correct {
+      background: #198038;
+      color: #eeeeee;
+    }
   }
 
   .wordle-game-backspace-button {

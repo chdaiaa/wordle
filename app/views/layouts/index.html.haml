@@ -5,29 +5,31 @@
   %body
     .wordle-index-page-content
       %h1.wordle-index-page-header
-        = "Wordle Game"
+        = "Wordle"
 
-      .wordle-game-input-fields-row
-        - (0..4).each do |index|
-          .wordle-game-input-field{data: {index: index}}
+      .wordle-game-input-pad
+        - (0..5).each do |row_index|
+          .wordle-game-input-pad-row{class: row_index.zero? ? "active" : ""}
+            - (0..4).each do |column_index|
+              .wordle-game-input-field{data: {"column-index": column_index}}
 
       .wordle-game-character-buttons-container
         .wordle-game-character-buttons-row
           - "QWERTYUIOP".each_char do |char|
-            .wordle-game-character-button
+            .wordle-game-character-button{data: {"val": char}}
               = char
 
         .wordle-game-character-buttons-row
           - "ASDFGHJKL".each_char do |char|
-            .wordle-game-character-button
+            .wordle-game-character-button{data: {"val": char}}
               = char
 
         .wordle-game-character-buttons-row
-          .wordle-game-enter-button
+          .wordle-game-enter-button{action: api_wordle_result_submit_path, data: {"valid-string": valid_string}}
             = "ENTER"
 
           - "ZXCVBNM".each_char do |char|
-            .wordle-game-character-button
+            .wordle-game-character-button{data: {"val": char}}
               = char
 
           .wordle-game-backspace-button
