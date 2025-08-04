@@ -1,0 +1,26 @@
+
+
+.wordle-index-page-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .wordle-index-page-header {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .wordle-game-input-fields-row {
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+
+    gap: 6px;
+  }
+
+  .wordle-game-input-field {
+    width: 62px;
+    height: 62px;
+    border: 2px solid #d3d6da;
+  }
+}
