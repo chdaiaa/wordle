@@ -5,6 +5,8 @@
   flex-direction: column;
   justify-content: center;
 
+  gap: 24px;
+
   .wordle-index-page-header {
     margin-left: auto;
     margin-right: auto;
@@ -22,5 +24,106 @@
     width: 62px;
     height: 62px;
     border: 2px solid #d3d6da;
+
+    font-family: "nyt-franklin";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: bold;
+    vertical-align: middle;
+    box-sizing: border-box;
+    color: #000000;
+    text-transform: uppercase;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
+    &.filled {
+      border: 2px solid #878a8c;
+    }
   }
+
+  .wordle-game-character-buttons-container {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+  .wordle-game-character-buttons-row {
+    display: flex;
+    justify-content: center;
+
+    gap: 6px;
+  }
+
+  .wordle-game-enter-button {
+    font-family: "nyt-franklin";
+    font-size: 12px;
+    font-weight: bold;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    height: 58px;
+    width: 65px;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: #d3d6da;
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, .3);
+  }
+
+  .wordle-game-character-button {
+    font-family: "nyt-franklin";
+    font-size: 1.25em;
+    font-weight: bold;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    height: 58px;
+    width: 43px;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: #d3d6da;
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, .3);
+  }
+
+  .wordle-game-backspace-button {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    height: 58px;
+    width: 65px;
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: #d3d6da;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, .3);
+  }
+
+
 }
