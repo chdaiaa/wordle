@@ -10,3 +10,25 @@
       .wordle-game-input-fields-row
         - (0..4).each do |index|
           .wordle-game-input-field{data: {index: index}}
+
+      .wordle-game-character-buttons-container
+        .wordle-game-character-buttons-row
+          - "QWERTYUIOP".each_char do |char|
+            .wordle-game-character-button
+              = char
+
+        .wordle-game-character-buttons-row
+          - "ASDFGHJKL".each_char do |char|
+            .wordle-game-character-button
+              = char
+
+        .wordle-game-character-buttons-row
+          .wordle-game-enter-button
+            = "ENTER"
+
+          - "ZXCVBNM".each_char do |char|
+            .wordle-game-character-button
+              = char
+
+          .wordle-game-backspace-button
+            = image_tag("backspace.svg", width: 20, height: 20)
