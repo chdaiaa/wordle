@@ -25,12 +25,19 @@
               = char
 
         .wordle-game-character-buttons-row
-          .wordle-game-enter-button{action: api_wordle_result_submit_path, data: {"valid-string": valid_string}}
-            = "ENTER"
-
           - "ZXCVBNM".each_char do |char|
             .wordle-game-character-button{data: {"val": char}}
               = char
 
           .wordle-game-backspace-button
             = image_tag("backspace.svg", width: 20, height: 20)
+
+        .wordle-game-character-buttons-row
+          .wordle-give-up-button
+            = "Give up"
+
+          .wordle-game-enter-button{action: api_wordle_result_submit_path, data: {"valid-string": valid_string}}
+            = "ENTER"
+
+          .wordle-random-guess-button{action: api_random_text_path}
+            = "Random Guess"

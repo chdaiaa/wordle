@@ -15,6 +15,7 @@ function initClickHandler() {
     const $char_button = $(".wordle-game-character-button");
 
     const $submit_button = $(".wordle-game-enter-button");
+    const $random_guess_button = $(".wordle-random-guess-button");
 
     const correct_text = $submit_button.data("valid-string")
 
@@ -35,106 +36,31 @@ function initClickHandler() {
             $first_blank_input_field.addClass("filled");
         });
 
+        $random_guess_button.on("click", function () {
+            $.ajax({
+                url:        $random_guess_button.attr("action"),
+                type:       "GET",
+                dataType:   "json",
+                success:    function (xhr) {
+                    const input_text = xhr.random_text;
+
+                    const $current_active_row = $input_row.filter(".active");
+
+                    $current_active_row.find(".wordle-game-input-field").each((_idx, el) => {
+                        $(el).text(input_text.charAt(_idx));
+                    })
+
+                    on_submit()
+                },
+            })
+        })
+
         $submit_button.on("click", function()  {
             if ( $input_row.hasClass("gameover") ) {
                 return
             }
 
-            var input_text = "";
-
-            const $current_active_row = $input_row.filter(".active");
-
-            $current_active_row.find(".wordle-game-input-field").each((_idx, el) => {
-                const $current_input_field = $(el);
-
-                input_text += $current_input_field.text().trim();
-            })
-
-            if ( input_text.length < 5 ) {
-                notyf.error({
-                    message: "Guess must be a 5-letter word.",
-                    position: {
-                        x: "center",
-                        y: "top",
-                    }
-                });
-
-                return;
-            }
-
-            const form_data = {
-                input_text:     input_text,
-                correct_string: correct_text,
-            }
-
-            $.ajax({
-                url:        $submit_button.attr("action"),
-                type:       "POST",
-                dataType:   "json",
-                data:       form_data, // Send JSON stringified data
-                error: function(xhr) {
-                    if ( xhr.status === 200 ) {
-                        $input_row.eq(current_attempt).find(".wordle-game-input-field").each((idx, el) => {
-                            $(el).addClass("correct")
-                            $char_button.filter(`[data-val=${$(el).text().trim()}]`).addClass("correct")
-                        })
-
-                        notyf.success({
-                            message: "You win this game",
-                            position: {
-                                x: "center",
-                                y: "top",
-                            },
-                            duration: 0,
-                        });
-
-                        $input_row.addClass("gameover")
-
-                        return
-                    }
-
-                    if ( xhr.responseJSON ) {
-                        notyf.error({
-                            message: xhr.responseJSON.error,
-                            position: {
-                                x: "center",
-                                y: "top",
-                            }
-                        });
-                    }
-                    else {
-                        $input_row.eq(current_attempt).find(".wordle-game-input-field").each((idx, el) => {
-                            for ( var i = 0; i < $submit_button.data("valid-string").length; i++ ) {
-                                if ( correct_text.charAt(idx) === $(el).text().trim() ) {
-                                    if ( $(el).data("column-index") === idx) {
-                                        $(el).addClass("correct")
-                                        $char_button.filter(`[data-val=${$(el).text().trim()}]`).addClass("correct")
-                                    }
-                                    else {
-                                        $(el).addClass("present")
-                                        $char_button.filter(`[data-val=${$(el).text().trim()}]`).addClass("present")
-                                    }
-                                }
-                                else {
-                                    $(el).addClass("absent")
-                                    $char_button.filter(`[data-val=${$(el).text().trim()}]`).addClass("absent")
-                                }
-                            }
-                        })
-                    }
-
-                    current_attempt++;
-
-                    if ( current_attempt < 6 ) {
-                        $input_row.removeClass("active");
-                        $input_row.eq(current_attempt).addClass("active");
-                    }
-                    else {
-                        $input_row.addClass("gameover")
-                    }
-
-                }
-            });
+            on_submit()
         })
 
 
@@ -151,6 +77,105 @@ function initClickHandler() {
         });
     });
 
+    function on_submit() {
+        var input_text = "";
+
+        const $current_active_row = $input_row.filter(".active");
+
+        $current_active_row.find(".wordle-game-input-field").each((_idx, el) => {
+            const $current_input_field = $(el);
+
+            input_text += $current_input_field.text().trim();
+        })
+
+        if ( input_text.length < 5 ) {
+            notyf.error({
+                message: "Guess must be a 5-letter word.",
+                position: {
+                    x: "center",
+                    y: "top",
+                }
+            });
+
+            return;
+        }
+
+        const form_data = {
+            input_text:     input_text,
+            correct_string: correct_text,
+        }
+
+        $.ajax({
+            url:        $submit_button.attr("action"),
+            type:       "POST",
+            dataType:   "json",
+            data:       form_data, // Send JSON stringified data
+            error: function(xhr) {
+                if ( xhr.status === 200 ) {
+                    $input_row.eq(current_attempt).find(".wordle-game-input-field").each((idx, el) => {
+                        $(el).addClass("correct")
+                        $char_button.filter(`[data-val=${$(el).text().trim()}]`).addClass("correct")
+                    })
+
+                    notyf.success({
+                        message: "You win this game",
+                        position: {
+                            x: "center",
+                            y: "top",
+                        },
+                        duration: 0,
+                    });
+
+                    $input_row.addClass("gameover")
+
+                    return
+                }
+
+                if ( xhr.responseJSON ) {
+                    notyf.error({
+                        message: xhr.responseJSON.error,
+                        position: {
+                            x: "center",
+                            y: "top",
+                        }
+                    });
+                }
+                else {
+                    $input_row.eq(current_attempt).find(".wordle-game-input-field").each((idx, el) => {
+                        for ( var i = 0; i < $submit_button.data("valid-string").length; i++ ) {
+                            if ( correct_text.charAt(idx) === $(el).text().trim() ) {
+                                if ( $(el).data("column-index") === idx) {
+                                    $(el).addClass("correct")
+                                    $char_button.filter(`[data-val=${$(el).text().trim()}]`).addClass("correct")
+                                }
+                                else {
+                                    $(el).addClass("present")
+                                    $char_button.filter(`[data-val=${$(el).text().trim()}]`).addClass("present")
+                                }
+                            }
+                            else {
+                                $(el).addClass("absent")
+                                $char_button.filter(`[data-val=${$(el).text().trim()}]`).addClass("absent")
+                            }
+                        }
+                    })
+                }
+
+                current_attempt++;
+
+                if ( current_attempt < 6 ) {
+                    $input_row.removeClass("active");
+                    $input_row.eq(current_attempt).addClass("active");
+                }
+                else {
+                    $input_row.addClass("gameover")
+                }
+
+            }
+        });
+    }
 }
+
+
 
 export default initClickHandler;
