@@ -18,6 +18,15 @@ gem "stimulus-rails"
 gem "jbuilder"
 # haml
 gem "haml-rails", "~> 2.0"
+# Simple form
+gem "simple_form"
+# Sass
+gem "sass-rails"
+
+gem "cells"
+gem "cells-rails"
+gem "cells-hamlit"
+gem "cells-haml"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
