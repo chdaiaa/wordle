@@ -28,5 +28,16 @@ if you are using mac, follow steps below to set up brew package:
 - install ruby: `mise install ruby@3.4.5` and then `mise use -g ruby@3.4.5`
 - install rails: `gem install rails`
 - install yarn package: `sudo npm install -g yarn`
-- verify yarn version: `yarn --version`
 - install project dependency: `bundle; yarn;`
+
+### Postgresql Setup
+
+- Installation
+  - if you are using windows wsl, following https://dev.to/sfpear/install-and-use-postgres-in-wsl-423d to setup
+  - if you are using mac, run following command to setup local db:
+    ```
+    brew install postgresql
+    brew services start postgresql
+    ```
+- `cp config/database.yml.example config/database.yml`
+- Run `rake db:create` to create local db
