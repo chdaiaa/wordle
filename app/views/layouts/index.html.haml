@@ -5,13 +5,12 @@
   %body
     .wordle-index-page-content
       %h1.wordle-index-page-header
-        = "Wordle"
+        = "ABSURDLE"
 
       .wordle-game-input-pad
-        - (0..5).each do |row_index|
-          .wordle-game-input-pad-row{class: row_index.zero? ? "active" : ""}
-            - (0..4).each do |column_index|
-              .wordle-game-input-field{data: {"column-index": column_index}}
+        .wordle-game-input-pad-row{class: "active"}
+          - (0..4).each do |column_index|
+            .wordle-game-input-field{data: {"column-index": column_index}}
 
       .wordle-game-character-buttons-container
         .wordle-game-character-buttons-row
@@ -29,6 +28,9 @@
             .wordle-game-character-button{data: {"val": char}}
               = char
 
+          .wordle-game-revert-button{class: "active disabled"}
+            = "⟲"
+
           .wordle-game-backspace-button
             = image_tag("backspace.svg", width: 20, height: 20)
 
@@ -36,7 +38,7 @@
           .wordle-give-up-button
             = "Give up"
 
-          .wordle-game-enter-button{action: api_wordle_result_submit_path, data: {"valid-string": valid_string}}
+          .wordle-game-enter-button{class: "disabled", action: api_wordle_result_submit_path, data: {"valid-string": valid_string}}
             = "ENTER"
 
           .wordle-random-guess-button{action: api_random_text_path}

@@ -133,29 +133,6 @@
     }
   }
 
-  @keyframes present_flip {
-    0% {
-      transform: rotateX(0);
-      background: #fff;
-      border-color: #333;
-    }
-    45% {
-      transform: rotateX(90deg);
-      background: #fff;
-      border-color: #333;
-    }
-    55% {
-      transform: rotateX(90deg);
-      background: #c9b458;   
-      border-color: #c9b458;
-    }
-    100% {
-      background: #c9b458;   
-      border-color: #c9b458;
-      color: #eee;
-    }
-  }
-
   @keyframes correct_flip {
     0% {
       transform: rotateX(0);
@@ -221,6 +198,12 @@
     align-items: center;
     text-transform: uppercase;
     -webkit-tap-highlight-color: rgba(0, 0, 0, .3);
+
+    &.disabled {
+      background: #f4f4f4;
+      color: #c6c6c6;
+      pointer-events: none;
+    }
   }
 
   .wordle-game-enter-button {
@@ -237,13 +220,19 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-    background-color: #d3d6da;
+    background: #d3d6da;
     color: #000000;
     display: flex;
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
     -webkit-tap-highlight-color: rgba(0, 0, 0, .3);
+
+    &.disabled {
+      background: #f4f4f4;
+      color: #c6c6c6;
+      pointer-events: none;
+    }
   }
 
   .wordle-game-character-button {
@@ -282,8 +271,15 @@
       background: #198038;
       color: #eeeeee;
     }
+
+    &.disabled {
+      background: #f4f4f4;
+      color: #c6c6c6;
+      pointer-events: none;
+    }
   }
 
+  .wordle-game-revert-button,
   .wordle-game-backspace-button {
     border: 0;
     padding: 0;
@@ -295,12 +291,22 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-    background-color: #d3d6da;
-    display: flex;
+    background: #d3d6da;
+    display: none;
     justify-content: center;
     align-items: center;
     text-transform: uppercase;
     -webkit-tap-highlight-color: rgba(0, 0, 0, .3);
+
+    &.active {
+      display: flex;
+    }
+
+    &.disabled {
+      background: #f4f4f4;
+      color: #c6c6c6;
+      pointer-events: none;
+    }
   }
 
 

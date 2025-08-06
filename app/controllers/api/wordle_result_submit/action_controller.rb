@@ -21,6 +21,12 @@ module Api::WordleResultSubmit
         return
       end
 
+      Wordle::Record.create!(
+        target_word: params[:correct_string],
+        attempt:     params[:attempt],
+        success:     true,
+      )
+
       head(200)
     end
 
