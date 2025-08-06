@@ -22,6 +22,12 @@ Rails.application.routes.draw do
       to: "wordle_result_submit/action#call",
       as: "wordle_result_submit",
     )
+
+    get(
+      :random_text,
+      to: "random_text/action#call",
+      as: "random_text",
+    )
   end
 
 end
