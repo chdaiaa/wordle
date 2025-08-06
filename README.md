@@ -41,3 +41,8 @@ if you are using mac, follow steps below to set up brew package:
     ```
 - `cp config/database.yml.example config/database.yml`
 - Run `rake db:create` to create local db
+
+### General Guide
+
+- start local server with `rails server`
+- visit `http://localhost:3000/index` for game page
